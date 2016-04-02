@@ -15,25 +15,9 @@ app.get('/', function(request, response) {
 });
 
 
-// app.get('/db', function (request, response) {
-//   if (request.query.submit != undefined) {
-//     response.send('done');
-//     return;
-//   }
-//   var url ="postgres://tgbdruuzgmrrxf:162TbmVitw3nDCxfX43DFUxzrx@ec2-23-21-157-223.compute-1.amazonaws.com:5432/d3qkq2csud3s16";
-//   pg.defaults.ssl = true;
-//   pg.connect(url, function(err, client, done) {
-//     if (err) throw err;
-//
-//     client.query('SELECT * FROM test_table', function(err, result) {
-//       done();
-//       if (err)
-//        { console.error(err); response.send("Error " + err); }
-//       else
-//        { response.render('pages/db', {results: result.rows, query:request.query} ); }
-//     });
-//   });
-// })
+app.get('/db', function (request, response) {
+  //
+})
 
 app.get('/test', function(request, response) {
   response.send('test 123');
