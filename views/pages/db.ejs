@@ -12,12 +12,10 @@
 <h2>Database Results</h2>
 
 <ul>
-    <% results.forEach(function(r) { %>
-        <li><%= r.id %> - <%= r.name %></li>
+    <% result.forEach(function(item) { %>
+        <li><%= item.hello %></li>
     <% }); %>
 </ul>
-
-<%= JSON.stringify(query) %>
 
 <form method="GET" action="/db">
   <input name="test" value="aaa"></input>
