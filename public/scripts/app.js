@@ -19699,24 +19699,60 @@
 	
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this));
 	
-	    var myFirebaseRef = new Firebase('https://glowing-fire-7199.firebaseio.com/items/');
-	    //  myFirebaseRef.push('hello');
+	    var myFirebaseRef = new Firebase('https://glowing-fire-7199.firebaseio.com/events/');
+	    // myFirebaseRef.push('hello');
 	
-	    myFirebaseRef.orderByKey().on("child_added", function (snapshot) {
-	      console.log(snapshot.key(), snapshot.val());
-	    });
-	
+	    // myFirebaseRef.orderByKey().on("child_added", function(snapshot) {
+	    //   console.log(snapshot.key(), snapshot.val());
+	    // });
 	    //console.log(Firebase);
+	
+	    _this.state = {
+	      data: []
+	    };
 	    return _this;
 	  }
 	
 	  _createClass(Main, [{
+	    key: 'onChange',
+	    value: function onChange(type, e) {
+	      this.value = e.target.value;
+	    }
+	  }, {
+	    key: 'onClick',
+	    value: function onClick() {
+	      this.state.data.push(this.value);
+	      this.setState();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'Hello World'
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'Hello World'
+	        ),
+	        this.state.val,
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          this.state.data.map(function (val) {
+	            return _react2.default.createElement(
+	              'li',
+	              null,
+	              val
+	            );
+	          })
+	        ),
+	        _react2.default.createElement('input', { onChange: this.onChange.bind(this, 'value') }),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.onClick.bind(this) },
+	          'submit'
+	        )
 	      );
 	    }
 	  }]);
