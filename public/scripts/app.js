@@ -19697,7 +19697,17 @@
 	  function Main() {
 	    _classCallCheck(this, Main);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Main).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this));
+	
+	    var myFirebaseRef = new Firebase('https://glowing-fire-7199.firebaseio.com/items/');
+	    //  myFirebaseRef.push('hello');
+	
+	    myFirebaseRef.orderByKey().on("child_added", function (snapshot) {
+	      console.log(snapshot.key(), snapshot.val());
+	    });
+	
+	    //console.log(Firebase);
+	    return _this;
 	  }
 	
 	  _createClass(Main, [{
