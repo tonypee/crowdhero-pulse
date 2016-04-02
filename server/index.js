@@ -46,7 +46,7 @@ app.get('/db', function (request, response) {
         });
     }
   });
-})
+});
 
 app.get('/test', function(request, response) {
   response.send('test 123');

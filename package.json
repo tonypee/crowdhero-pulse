@@ -2,7 +2,7 @@
   "name": "crowdhero-pulse",
   "version": "0.0.1",
   "description": "Crowdhero Pulse",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
     "start": "node index.js"
   },
