@@ -1,8 +1,11 @@
 import Baobab from 'baobab';
 
 var tree = new Baobab({
-  items: [],
-  opportunities: []
+  opportunities: {},
+  editing: {
+    key: null,
+    val: {}
+  }
 });
 
 window.tree = tree;

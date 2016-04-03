@@ -21,7 +21,8 @@ class Main extends React.Component {
         <Router history={browserHistory}>
           <Route path="/" component={Navigation}>
             <IndexRoute component={Opportunities} />
-            <Route path="/edit(/:id)" component={OpportunityAddEdit} />
+            <Route path="/add" component={OpportunityAddEdit} />
+            <Route path="/edit/:id" component={OpportunityAddEdit} />
             <Route path="/view(/:id)" component={Opportunity} />
           </Route>
         </Router>

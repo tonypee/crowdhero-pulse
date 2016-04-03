@@ -10,26 +10,36 @@ var branch = baobabReact.decorators.branch;
 @root(tree)
 @branch({
   cursors: {
-    items: ['items']
+    opportunities: ['opportunities']
   }
 })
 class Opportunities extends React.Component {
   constructor () {
     super()
-    this.db = new Firebase(config.firebaseURL + '/items/');
-    this.db.limitToLast(25)
-      .on("child_added", child => {
-        tree.select('items').push(child.val());
+  }
+
+  componentDidMount() {
+    var db = new Firebase(config.firebaseURL + '/items/');
+    db.on("child_added", child => {
+        tree.select('opportunities').set(child.key(), child.val());
       });
   }
 
   render() {
+
     return (
-      <ul>
-        {this.props.items.map((val,i) => {
-          return <li key={i}>{val}</li>
-        })}
-      </ul>
+      <div>
+        <ul>
+          {_.map(this.props.opportunities, (val,i) => {
+            return (
+              <li key={i}>
+                {val.name} - {val.company}
+                <Link to={'/edit/' + i}>edit</Link>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
     );
   }
 }

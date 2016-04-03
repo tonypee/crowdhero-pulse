@@ -6,7 +6,7 @@ class Navigation extends React.Component {
   render() {
     return (
       <div>
-        <Link to="/edit">Add</Link>
+        <Link to="/add">Add</Link>
         {this.props.children}
       </div>
     );
