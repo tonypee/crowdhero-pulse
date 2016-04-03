@@ -5,36 +5,26 @@ import { Router, Route, Link, browserHistory } from 'react-router'
 import baobabReact from 'baobab-react';
 import config from '../config';
 import _ from 'lodash';
+import DataActions from '../actions/DataActions';
 var root = baobabReact.decorators.root;
 var branch = baobabReact.decorators.branch;
 
 @root(tree)
 @branch({
   cursors: {
-    editing: ['editing']
+    selected: ['selected']
   }
 })
 class OpportunityAddEdit extends React.Component {
 
-  componentDidMount() {
-    this.dataCursor = tree.select('editing');
+  componentWillMount() {
+    this.dataCursor = tree.select('selected');
     this.isAdding = this.props.params.id === undefined;
 
-    console.log('id', this.props.params.id);
-
-    this.db = new Firebase(config.firebaseURL + '/items/' + (this.props.params.id || ''));
-    this.db.once('value', child => {
-      if (!this.isAdding) {
-        tree.select('editing').set({
-          key:child.key(),
-          val:child.val()
-        });
-      }
-    });
-
-    if (this.isAdding) { // reset values
-      this.dataCursor.set(['id'], null);
-      this.dataCursor.set(['val'], {});
+    if (!this.isAdding) {
+      DataActions.selectOpportunity(this.props.params.id);
+    } else {
+      DataActions.resetSelected();
     }
   }
 
@@ -43,18 +33,18 @@ class OpportunityAddEdit extends React.Component {
   }
 
   onSubmit() {
-    var data = this.props.editing.val;
-    if (!this.props.params.id) {
-      this.db.push(data);
+    var data = this.props.selected.val;
+    if (this.isAdding) {
+      DataActions.addOpportunity(data);
     } else {
-      this.db.update(data);
+      DataActions.updateOpportunity(this.props.params.id, data);
     }
 
     browserHistory.push('/')
   }
 
   onChange(type, e) {
-    this.dataCursor.set(['val', type], e.target.value);
+    DataActions.modifySelectedField(type, e.target.value)
   }
 
   handleFile(e) {
@@ -63,13 +53,13 @@ class OpportunityAddEdit extends React.Component {
     var file = e.target.files[0];
 
     reader.onload = (upload) => {
-      this.dataCursor.set(['val', 'image'], upload.target.result);
+      DataActions.modifySelectedField('image', upload.target.result)
     }
     reader.readAsDataURL(file);
   }
 
   render() {
-    if (this.props.params.id && !this.props.editing.key) {
+    if (this.props.params.id && !this.props.selected.key) {
       return <div />;
     }
     var imageStyle = {
@@ -84,29 +74,29 @@ class OpportunityAddEdit extends React.Component {
             <label for="name">Name</label>
             <input id="name" ref="name"
                    onChange={this.onChange.bind(this, 'name')}
-                   value={this.props.editing.val.name || ''}/>
+                   value={this.props.selected.val.name || ''}/>
           </li>
           <li>
             <label for="company">Company</label>
             <input id="company" ref="company"
                    onChange={this.onChange.bind(this, 'company')}
-                   value={this.props.editing.val.company || ''} />
+                   value={this.props.selected.val.company || ''} />
           </li>
           <li>
             <label for="name">Date</label>
             <input id="date" ref="date"
                    onChange={this.onChange.bind(this, 'date')}
-                   value={this.props.editing.val.date || ''}/>
+                   value={this.props.selected.val.date || ''}/>
           </li>
           <li>
             <label for="name">Description</label>
             <textarea ref="description"
                       onChange={this.onChange.bind(this, 'description')}
-                      value={this.props.editing.val.description || ''}></textarea>
+                      value={this.props.selected.val.description || ''}></textarea>
           </li>
           <li>
             <label for="image">Image</label>
-            <img style={imageStyle} src={this.props.editing.val.image || ''} />
+            <img style={imageStyle} src={this.props.selected.val.image || ''} />
             <input type="file" onChange={this.handleFile.bind(this)} />
           </li>
         </ul>

@@ -2,7 +2,7 @@ import Baobab from 'baobab';
 
 var tree = new Baobab({
   opportunities: {},
-  editing: {
+  selected: {
     key: null,
     val: {}
   }

@@ -26,6 +26,10 @@ class Opportunities extends React.Component {
   }
 
   render() {
+    var imageStyle = {
+      maxWidth: 100,
+      maxHeight: 100
+    }
 
     return (
       <div>
@@ -33,7 +37,8 @@ class Opportunities extends React.Component {
           {_.map(this.props.opportunities, (val,i) => {
             return (
               <li key={i}>
-                {val.name} - {val.company}
+                {val.image && <img style={imageStyle} src={val.image} />}
+                <Link to={'/view/' + i}>{val.name} - {val.company}</Link>
                 <Link to={'/edit/' + i}>edit</Link>
               </li>
             )

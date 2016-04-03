@@ -23,7 +23,7 @@ class Main extends React.Component {
             <IndexRoute component={Opportunities} />
             <Route path="/add" component={OpportunityAddEdit} />
             <Route path="/edit/:id" component={OpportunityAddEdit} />
-            <Route path="/view(/:id)" component={Opportunity} />
+            <Route path="/view/:id" component={Opportunity} />
           </Route>
         </Router>
       </div>
