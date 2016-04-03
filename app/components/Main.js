@@ -4,7 +4,8 @@ import tree from '../state';
 import Opportunity from './Opportunity';
 import OpportunityAddEdit from './OpportunityAddEdit';
 import Opportunities from './Opportunities';
-import { Router, Route, Link, browserHistory } from 'react-router'
+import Navigation from './Navigation';
+import { IndexRoute, Router, Route, Link, browserHistory } from 'react-router'
 
 import baobabReact from 'baobab-react';
 var root = baobabReact.decorators.root;
@@ -19,11 +20,15 @@ class Main extends React.Component {
 
   render() {
     return (
-      <Router history={browserHistory}>
-        <Route path="/" component={Opportunities} />
-        <Route path="/m" component={OpportunityAddEdit} />
-        <Route path="/v" component={Opportunity} />
-      </Router>
+      <div>
+        <Router history={browserHistory}>
+          <Route path="/" component={Navigation}>
+            <IndexRoute component={Opportunities} />
+            <Route path="/edit(/:id)" component={OpportunityAddEdit} />
+            <Route path="/view(/:id)" component={Opportunity} />
+          </Route>
+        </Router>
+      </div>
     )
   }
 }

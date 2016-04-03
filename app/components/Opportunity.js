@@ -23,7 +23,7 @@ class Opportunity extends React.Component {
   render() {
     return (
       <div>
-        <div>Opportunity</div>
+        <h1>Opportunity {this.props.params.id}</h1>
       </div>
     )
   }
