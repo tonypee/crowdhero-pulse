@@ -33,9 +33,6 @@ class OpportunityAddEdit extends React.Component {
       <div>
         <div>Hello World</div>
         <ul>
-          {this.props.items.map((val,i) => {
-            return <li key={i}>{val}</li>
-          })}
         </ul>
         <input ref="textInput" />
         <button onClick={this.onAdd.bind(this)}>submit</button>

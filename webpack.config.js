@@ -31,5 +31,11 @@ module.exports = {
 	},
   plugins: [
     new WebpackNotifierPlugin()
-  ]
+  ],
+  externals: {
+    "firebase": "Firebase",
+    "react": "React",
+    "react-dom": "ReactDOM",
+    "react-router": "ReactRouter"
+  }
 };
