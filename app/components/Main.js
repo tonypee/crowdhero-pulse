@@ -1,42 +1,54 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import tree from '../state';
 
+import baobabReact from 'baobab-react';
+
+var root = baobabReact.decorators.root;
+var branch = baobabReact.decorators.branch;
+//var branch = require('baobab-react/decorators').branch;
+
+@root(tree)
+@branch({
+  cursors: {
+    items: ['items']
+  }
+})
 class Main extends React.Component {
   constructor () {
     super()
-    var myFirebaseRef = new Firebase('https://glowing-fire-7199.firebaseio.com/events/');
-    // myFirebaseRef.push('hello');
-
-    // myFirebaseRef.orderByKey().on("child_added", function(snapshot) {
-    //   console.log(snapshot.key(), snapshot.val());
-    // });
-    //console.log(Firebase);
-
-    this.state = {
-      data: []
-    }
+    this.db = new Firebase('https://glowing-fire-7199.firebaseio.com/items/');
+    this.db.limitToLast(25)
+      .on("child_added", child => {
+        tree.select('items').push(child.val());
+      });
   }
-  onChange(type, e) {
-    this.value = e.target.value;
+  componentDidMount() {}
+
+  onAdd() {
+    var value = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+    this.db.push(value);
   }
 
-  onClick() {
-    this.state.data.push(this.value);
-    this.setState();
-  }
   render() {
     return (
       <div>
         <div>Hello World</div>
-        {this.state.val}
-        <ul>
-          {this.state.data.map(val => {
-            return <li>{val}</li>
-          })}
-        </ul>
-        <input onChange={this.onChange.bind(this, 'value')}></input>
-        <button onClick={this.onClick.bind(this)}>submit</button>
+        {this.renderItems()}
+        <input ref="textInput" />
+        <button onClick={this.onAdd.bind(this)}>submit</button>
       </div>
     )
+  }
+
+  renderItems() {
+    return (
+      <ul>
+        {this.props.items.map((val,i) => {
+          return <li key={i}>{val}</li>
+        })}
+      </ul>
+    );
   }
 }
 

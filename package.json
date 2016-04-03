@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "ejs": "2.3.3",
+    "baobab": "^2.3.3",
+    "baobab-react": "^1.0.1",
     "express": "4.13.3",
     "firebase": "^2.4.2",
     "mongodb": "^2.1.14",
