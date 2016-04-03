@@ -6,7 +6,11 @@ class Navigation extends React.Component {
   render() {
     return (
       <div>
-        <Link to="/add">Add</Link>
+        <nav className="navbar navbar-default navbar-static-top navbar-inverse">
+          <ul>
+            <li><Link className="btn btn-default btn-sm" to="/add">Add</Link></li>
+          </ul>
+        </nav>
         {this.props.children}
       </div>
     );

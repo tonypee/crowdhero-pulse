@@ -38,8 +38,8 @@ class Opportunities extends React.Component {
             return (
               <li key={i}>
                 {val.image && <img style={imageStyle} src={val.image} />}
-                <Link to={'/view/' + i}>{val.name} - {val.company}</Link>
-                <Link to={'/edit/' + i}>edit</Link>
+                <Link to={'/view/'+i}>{val.name} - {val.company}</Link>
+                <Link to={'/edit/'+i}>edit</Link>
               </li>
             )
           })}

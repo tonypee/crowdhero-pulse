@@ -18,7 +18,6 @@ var branch = baobabReact.decorators.branch;
 class OpportunityAddEdit extends React.Component {
 
   componentWillMount() {
-    this.dataCursor = tree.select('selected');
     this.isAdding = this.props.params.id === undefined;
 
     if (!this.isAdding) {
@@ -68,7 +67,9 @@ class OpportunityAddEdit extends React.Component {
     }
 
     return (
-      <div>
+      <div className="page">
+        {this.isAdding && <h3>Add</h3>}
+        {!this.isAdding && <h3>Update</h3>}
         <ul>
           <li>
             <label for="name">Name</label>

@@ -1,3 +1,4 @@
+import "../styles/main.less";
 import React from 'react';
 import tree from '../state';
 import Opportunity from './Opportunity';
