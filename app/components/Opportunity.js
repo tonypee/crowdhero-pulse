@@ -14,18 +14,12 @@ var branch = baobabReact.decorators.branch;
   }
 })
 class Opportunity extends React.Component {
-  constructor () {
-    super()
-  }
-
-  componentDidMount() {}
-
   render() {
     return (
       <div>
         <h1>Opportunity {this.props.params.id}</h1>
       </div>
-    )
+    );
   }
 }
 

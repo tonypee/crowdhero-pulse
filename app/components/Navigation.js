@@ -9,7 +9,7 @@ class Navigation extends React.Component {
         <Link to="/edit">Add</Link>
         {this.props.children}
       </div>
-    )
+    );
   }
 }
 

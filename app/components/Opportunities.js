@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import tree from '../state';
 import { Router, Route, Link } from 'react-router'
 import baobabReact from 'baobab-react';
+import config from '../config';
 var root = baobabReact.decorators.root;
 var branch = baobabReact.decorators.branch;
 
@@ -15,7 +16,7 @@ var branch = baobabReact.decorators.branch;
 class Opportunities extends React.Component {
   constructor () {
     super()
-    this.db = new Firebase('https://glowing-fire-7199.firebaseio.com/items/');
+    this.db = new Firebase(config.firebaseURL + '/items/');
     this.db.limitToLast(25)
       .on("child_added", child => {
         tree.select('items').push(child.val());
@@ -29,7 +30,7 @@ class Opportunities extends React.Component {
           return <li key={i}>{val}</li>
         })}
       </ul>
-    )
+    );
   }
 }
 

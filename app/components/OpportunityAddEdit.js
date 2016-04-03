@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import tree from '../state';
 import { Router, Route, Link } from 'react-router'
 import baobabReact from 'baobab-react';
+import config from '../config';
 var root = baobabReact.decorators.root;
 var branch = baobabReact.decorators.branch;
 
@@ -14,14 +15,13 @@ var branch = baobabReact.decorators.branch;
 })
 class OpportunityAddEdit extends React.Component {
   constructor () {
-    super()
-    this.db = new Firebase('https://glowing-fire-7199.firebaseio.com/items/');
+    super();
+    this.db = new Firebase(config.firebaseURL + '/items/');
     this.db.limitToLast(25)
       .on("child_added", child => {
         tree.select('items').push(child.val());
       });
   }
-  componentDidMount() {}
 
   onAdd() {
     var value = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
@@ -32,20 +32,14 @@ class OpportunityAddEdit extends React.Component {
     return (
       <div>
         <div>Hello World</div>
-        {this.renderItems()}
+        <ul>
+          {this.props.items.map((val,i) => {
+            return <li key={i}>{val}</li>
+          })}
+        </ul>
         <input ref="textInput" />
         <button onClick={this.onAdd.bind(this)}>submit</button>
       </div>
-    )
-  }
-
-  renderItems() {
-    return (
-      <ul>
-        {this.props.items.map((val,i) => {
-          return <li key={i}>{val}</li>
-        })}
-      </ul>
     );
   }
 }

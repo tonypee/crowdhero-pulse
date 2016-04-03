@@ -1,12 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import tree from '../state';
 import Opportunity from './Opportunity';
 import OpportunityAddEdit from './OpportunityAddEdit';
 import Opportunities from './Opportunities';
 import Navigation from './Navigation';
 import { IndexRoute, Router, Route, Link, browserHistory } from 'react-router'
-
 import baobabReact from 'baobab-react';
 var root = baobabReact.decorators.root;
 var branch = baobabReact.decorators.branch;
@@ -16,7 +14,6 @@ class Main extends React.Component {
   constructor () {
     super()
   }
-  componentDidMount() {}
 
   render() {
     return (
@@ -29,7 +26,7 @@ class Main extends React.Component {
           </Route>
         </Router>
       </div>
-    )
+    );
   }
 }
 
