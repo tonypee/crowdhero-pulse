@@ -30,7 +30,7 @@ class Opportunity extends React.Component {
     }
     var val = this.props.selected.val;
     return (
-      <div>
+      <div className="page opportunity">
         <h1>Opportunity</h1>
         {val.image && <img style={imageStyle} src={val.image} />}
         {val.name} - {val.company}

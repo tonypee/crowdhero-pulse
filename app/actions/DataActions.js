@@ -3,10 +3,6 @@ import config from '../config';
 
 class DataActions {
 
-  constructor() {
-    this.cur = tree.select('selected');
-  }
-
   addOpportunity(data) {
     var db = new Firebase(config.firebaseURL + '/items/');
     db.push(data);
@@ -34,7 +30,7 @@ class DataActions {
   }
 
   resetSelected() {
-    this.cur.set({
+    tree.select('selected').set({
       key:null,
       val:{}
     });

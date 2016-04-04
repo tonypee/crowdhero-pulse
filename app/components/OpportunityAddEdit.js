@@ -67,7 +67,7 @@ class OpportunityAddEdit extends React.Component {
     }
 
     return (
-      <div className="page">
+      <div className="page opportunityAddEdit">
         {this.isAdding && <h3>Add</h3>}
         {!this.isAdding && <h3>Update</h3>}
         <ul>

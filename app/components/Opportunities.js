@@ -32,14 +32,14 @@ class Opportunities extends React.Component {
     }
 
     return (
-      <div>
+      <div className="page opportunities">
         <ul>
           {_.map(this.props.opportunities, (val,i) => {
             return (
               <li key={i}>
-                {val.image && <img style={imageStyle} src={val.image} />}
-                <Link to={'/view/'+i}>{val.name} - {val.company}</Link>
-                <Link to={'/edit/'+i}>edit</Link>
+                {val.image && <img style={imageStyle} src={val.image} />}<br />
+                <Link to={`/view/${i}`}>{val.name} - {val.company}</Link> &nbsp;
+                <Link to={`/edit/${i}`}>edit</Link>
               </li>
             )
           })}
