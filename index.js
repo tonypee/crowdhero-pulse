@@ -12,8 +12,8 @@ app.set('view engine', 'ejs');
 
 //app.get('', function(request, response) {
 app.all('/*', function(request, response) {
-  console.log();
-  response.render('pages/index', {baseURL:request.protocol + '://' + request.get('host')});
+  var baseURL = request.get('host') == 'localhost:5000' ? 'http://localhost:5000' : 'https://crowdhero-pulse.herokuapp.com';
+  response.render('pages/index', {baseURL: baseURL});
 });
 
 
