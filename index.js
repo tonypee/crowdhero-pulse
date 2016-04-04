@@ -12,7 +12,8 @@ app.set('view engine', 'ejs');
 
 //app.get('', function(request, response) {
 app.all('/*', function(request, response) {
-  response.render('pages/index');
+  console.log();
+  response.render('pages/index', {host:request.headers.host});
 });
 
 
