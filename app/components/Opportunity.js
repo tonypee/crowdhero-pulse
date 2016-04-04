@@ -8,7 +8,6 @@ import DataActions from '../actions/DataActions';
 var root = baobabReact.decorators.root;
 var branch = baobabReact.decorators.branch;
 
-@root(tree)
 @branch({
   cursors: {
     selected: ['selected']

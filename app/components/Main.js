@@ -12,9 +12,6 @@ var branch = baobabReact.decorators.branch;
 
 @root(tree)
 class Main extends React.Component {
-  constructor () {
-    super()
-  }
 
   render() {
     return (

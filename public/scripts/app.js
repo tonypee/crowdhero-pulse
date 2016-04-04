@@ -141,7 +141,7 @@
 	  function Main() {
 	    _classCallCheck(this, Main);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Main).apply(this, arguments));
 	  }
 	
 	  _createClass(Main, [{
@@ -3858,7 +3858,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _dec, _dec2, _class;
+	var _dec, _class;
 	
 	var _react = __webpack_require__(1);
 	
@@ -3897,11 +3897,11 @@
 	var root = _baobabReact2.default.decorators.root;
 	var branch = _baobabReact2.default.decorators.branch;
 	
-	var Opportunity = (_dec = root(_state2.default), _dec2 = branch({
+	var Opportunity = (_dec = branch({
 	  cursors: {
 	    selected: ['selected']
 	  }
-	}), _dec(_class = _dec2(_class = function (_React$Component) {
+	}), _dec(_class = function (_React$Component) {
 	  _inherits(Opportunity, _React$Component);
 	
 	  function Opportunity() {
@@ -3943,7 +3943,7 @@
 	  }]);
 	
 	  return Opportunity;
-	}(_react2.default.Component)) || _class) || _class);
+	}(_react2.default.Component)) || _class);
 	exports.default = Opportunity;
 
 /***/ },
@@ -4686,7 +4686,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _dec, _dec2, _class;
+	var _dec, _class;
 	
 	var _react = __webpack_require__(1);
 	
@@ -4726,14 +4726,13 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var root = _baobabReact2.default.decorators.root;
 	var branch = _baobabReact2.default.decorators.branch;
 	
-	var OpportunityAddEdit = (_dec = root(_state2.default), _dec2 = branch({
+	var OpportunityAddEdit = (_dec = branch({
 	  cursors: {
 	    selected: ['selected']
 	  }
-	}), _dec(_class = _dec2(_class = function (_React$Component) {
+	}), _dec(_class = function (_React$Component) {
 	  _inherits(OpportunityAddEdit, _React$Component);
 	
 	  function OpportunityAddEdit() {
@@ -4885,7 +4884,7 @@
 	  }]);
 	
 	  return OpportunityAddEdit;
-	}(_react2.default.Component)) || _class) || _class);
+	}(_react2.default.Component)) || _class);
 	exports.default = OpportunityAddEdit;
 
 /***/ },
@@ -20804,7 +20803,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _dec, _dec2, _class;
+	var _dec, _class;
 	
 	var _react = __webpack_require__(1);
 	
@@ -20839,17 +20838,17 @@
 	var root = _baobabReact2.default.decorators.root;
 	var branch = _baobabReact2.default.decorators.branch;
 	
-	var Opportunities = (_dec = root(_state2.default), _dec2 = branch({
+	var Opportunities = (_dec = branch({
 	  cursors: {
 	    opportunities: ['opportunities']
 	  }
-	}), _dec(_class = _dec2(_class = function (_React$Component) {
+	}), _dec(_class = function (_React$Component) {
 	  _inherits(Opportunities, _React$Component);
 	
 	  function Opportunities() {
 	    _classCallCheck(this, Opportunities);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Opportunities).call(this));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Opportunities).apply(this, arguments));
 	  }
 	
 	  _createClass(Opportunities, [{
@@ -20900,7 +20899,7 @@
 	  }]);
 	
 	  return Opportunities;
-	}(_react2.default.Component)) || _class) || _class);
+	}(_react2.default.Component)) || _class);
 	exports.default = Opportunities;
 
 /***/ },
@@ -21115,7 +21114,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  background: #e2e2e2;\n}\nul,\nli {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\nh3 {\n  font-size: 20px;\n}\n.navbar {\n  padding: 10px;\n}\n.page {\n  margin: 0 30px;\n  padding: 10px;\n}\n.page label {\n  width: 150px;\n}\n.opportunity {\n  background: white;\n}\n.opportunityAddEdit {\n  background: white;\n}\n.opportunities li {\n  margin: 3px;\n  padding: 10px;\n  background: white;\n}\n.opportunities li img {\n  padding-right: 5px;\n}\n", ""]);
+	exports.push([module.id, "body {\n  background: #e2e2e2;\n}\nul,\nli {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\nh3 {\n  font-size: 20px;\n}\n.navbar {\n  padding: 10px;\n}\n.page {\n  margin: 0 30px;\n  padding: 10px;\n}\n.opportunity {\n  background: white;\n}\n.opportunityAddEdit {\n  background: white;\n}\n.opportunities li {\n  margin: 3px;\n  padding: 10px;\n  background: white;\n}\n.opportunities li img {\n  padding-right: 5px;\n}\n.opportunities li label {\n  width: 150px;\n}\n", ""]);
 	
 	// exports
 

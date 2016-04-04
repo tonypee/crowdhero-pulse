@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {Link} from 'react-router';
 
 class Navigation extends React.Component {
+
   render() {
     return (
       <div>

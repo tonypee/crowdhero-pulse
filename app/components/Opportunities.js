@@ -7,16 +7,12 @@ import config from '../config';
 var root = baobabReact.decorators.root;
 var branch = baobabReact.decorators.branch;
 
-@root(tree)
 @branch({
   cursors: {
     opportunities: ['opportunities']
   }
 })
 class Opportunities extends React.Component {
-  constructor () {
-    super()
-  }
 
   componentDidMount() {
     var db = new Firebase(config.firebaseURL + '/items/');
