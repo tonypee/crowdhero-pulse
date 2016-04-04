@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 //app.get('', function(request, response) {
 app.all('/*', function(request, response) {
   console.log();
-  response.render('pages/index', {host:request.headers.host});
+  response.render('pages/index', {baseURL:request.protocol + '://' + request.get('host')});
 });
 
 
