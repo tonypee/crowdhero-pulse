@@ -101,7 +101,7 @@ class OpportunityAddEdit extends React.Component {
             <input type="file" onChange={this.handleFile.bind(this)} />
           </li>
         </ul>
-
+        <br />
         <button onClick={this.onSubmit.bind(this)}>submit</button>
       </div>
     );

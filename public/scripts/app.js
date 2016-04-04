@@ -3930,7 +3930,7 @@
 	        'div',
 	        { className: 'page opportunity' },
 	        _react2.default.createElement(
-	          'h1',
+	          'h3',
 	          null,
 	          'Opportunity'
 	        ),
@@ -4874,6 +4874,7 @@
 	            _react2.default.createElement('input', { type: 'file', onChange: this.handleFile.bind(this) })
 	          )
 	        ),
+	        _react2.default.createElement('br', null),
 	        _react2.default.createElement(
 	          'button',
 	          { onClick: this.onSubmit.bind(this) },
@@ -20863,8 +20864,8 @@
 	    key: 'render',
 	    value: function render() {
 	      var imageStyle = {
-	        maxWidth: 100,
-	        maxHeight: 100
+	        maxWidth: 50,
+	        maxHeight: 50
 	      };
 	
 	      return _react2.default.createElement(
@@ -20878,7 +20879,6 @@
 	              'li',
 	              { key: i },
 	              val.image && _react2.default.createElement('img', { style: imageStyle, src: val.image }),
-	              _react2.default.createElement('br', null),
 	              _react2.default.createElement(
 	                _reactRouter.Link,
 	                { to: '/view/' + i },
@@ -21115,7 +21115,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".navbar {\n  padding: 10px;\n}\n.page {\n  padding: 0 30px;\n}\n.page label {\n  width: 150px;\n}\n.opportunities li {\n  padding: 10px;\n}\n", ""]);
+	exports.push([module.id, "body {\n  background: #e2e2e2;\n}\nul,\nli {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\nh3 {\n  font-size: 20px;\n}\n.navbar {\n  padding: 10px;\n}\n.page {\n  margin: 0 30px;\n  padding: 10px;\n}\n.page label {\n  width: 150px;\n}\n.opportunity {\n  background: white;\n}\n.opportunityAddEdit {\n  background: white;\n}\n.opportunities li {\n  margin: 3px;\n  padding: 10px;\n  background: white;\n}\n.opportunities li img {\n  padding-right: 5px;\n}\n", ""]);
 	
 	// exports
 
