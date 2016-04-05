@@ -5,7 +5,7 @@ import { Router, Route, Link, browserHistory } from 'react-router'
 import baobabReact from 'baobab-react';
 import config from '../config';
 import _ from 'lodash';
-import DataActions from '../actions/DataActions';
+import ItemActions from '../actions/ItemActions';
 var branch = baobabReact.decorators.branch;
 
 @branch({
@@ -19,9 +19,9 @@ class OpportunityAddEdit extends React.Component {
     this.isAdding = this.props.params.id === undefined;
 
     if (!this.isAdding) {
-      DataActions.selectOpportunity(this.props.params.id);
+      ItemActions.selectOpportunity(this.props.params.id);
     } else {
-      DataActions.resetSelected();
+      ItemActions.resetSelected();
     }
   }
 
@@ -32,16 +32,16 @@ class OpportunityAddEdit extends React.Component {
   onSubmit() {
     var data = this.props.selected;
     if (this.isAdding) {
-      DataActions.addOpportunity(data);
+      ItemActions.addOpportunity(data);
     } else {
-      DataActions.updateOpportunity(this.props.params.id, data);
+      ItemActions.updateOpportunity(this.props.params.id, data);
     }
 
     browserHistory.push('/')
   }
 
   onChange(type, e) {
-    DataActions.modifySelectedField(type, e.target.value)
+    ItemActions.modifySelectedField(type, e.target.value)
   }
 
   handleFile(type, e) {
@@ -50,7 +50,7 @@ class OpportunityAddEdit extends React.Component {
     var file = e.target.files[0];
 
     reader.onload = (upload) => {
-      DataActions.modifySelectedField('image', upload.target.result)
+      ItemActions.modifySelectedField('image', upload.target.result)
     }
     reader.readAsDataURL(file);
   }

@@ -3879,9 +3879,9 @@
 	
 	var _config2 = _interopRequireDefault(_config);
 	
-	var _DataActions = __webpack_require__(30);
+	var _ItemActions = __webpack_require__(35);
 	
-	var _DataActions2 = _interopRequireDefault(_DataActions);
+	var _ItemActions2 = _interopRequireDefault(_ItemActions);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -3910,7 +3910,7 @@
 	  _createClass(Opportunity, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      _DataActions2.default.selectOpportunity(this.props.params.id);
+	      _ItemActions2.default.selectOpportunity(this.props.params.id);
 	    }
 	  }, {
 	    key: 'render',
@@ -4708,9 +4708,9 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _DataActions = __webpack_require__(30);
+	var _ItemActions = __webpack_require__(35);
 	
-	var _DataActions2 = _interopRequireDefault(_DataActions);
+	var _ItemActions2 = _interopRequireDefault(_ItemActions);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -4741,9 +4741,9 @@
 	      this.isAdding = this.props.params.id === undefined;
 	
 	      if (!this.isAdding) {
-	        _DataActions2.default.selectOpportunity(this.props.params.id);
+	        _ItemActions2.default.selectOpportunity(this.props.params.id);
 	      } else {
-	        _DataActions2.default.resetSelected();
+	        _ItemActions2.default.resetSelected();
 	      }
 	    }
 	  }, {
@@ -4756,9 +4756,9 @@
 	    value: function onSubmit() {
 	      var data = this.props.selected;
 	      if (this.isAdding) {
-	        _DataActions2.default.addOpportunity(data);
+	        _ItemActions2.default.addOpportunity(data);
 	      } else {
-	        _DataActions2.default.updateOpportunity(this.props.params.id, data);
+	        _ItemActions2.default.updateOpportunity(this.props.params.id, data);
 	      }
 	
 	      _reactRouter.browserHistory.push('/');
@@ -4766,7 +4766,7 @@
 	  }, {
 	    key: 'onChange',
 	    value: function onChange(type, e) {
-	      _DataActions2.default.modifySelectedField(type, e.target.value);
+	      _ItemActions2.default.modifySelectedField(type, e.target.value);
 	    }
 	  }, {
 	    key: 'handleFile',
@@ -4776,7 +4776,7 @@
 	      var file = e.target.files[0];
 	
 	      reader.onload = function (upload) {
-	        _DataActions2.default.modifySelectedField('image', upload.target.result);
+	        _ItemActions2.default.modifySelectedField('image', upload.target.result);
 	      };
 	      reader.readAsDataURL(file);
 	    }
@@ -20978,78 +20978,7 @@
 	module.exports = Firebase;
 
 /***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _state = __webpack_require__(4);
-	
-	var _state2 = _interopRequireDefault(_state);
-	
-	var _config = __webpack_require__(23);
-	
-	var _config2 = _interopRequireDefault(_config);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var DataActions = function () {
-	  function DataActions() {
-	    _classCallCheck(this, DataActions);
-	  }
-	
-	  _createClass(DataActions, [{
-	    key: 'addOpportunity',
-	    value: function addOpportunity(data) {
-	      var db = new Firebase(_config2.default.firebaseURL + '/items/');
-	      db.push(data);
-	    }
-	  }, {
-	    key: 'updateOpportunity',
-	    value: function updateOpportunity(key, data) {
-	      var db = new Firebase(_config2.default.firebaseURL + '/items/' + key);
-	      db.update(data);
-	    }
-	  }, {
-	    key: 'selectOpportunity',
-	    value: function selectOpportunity(key) {
-	      this.resetSelected();
-	
-	      var db = new Firebase(_config2.default.firebaseURL + '/items/' + key);
-	      db.once('value', function (child) {
-	        _state2.default.select('selected').set(_extends({
-	          key: child.key()
-	        }, child.val()));
-	      });
-	    }
-	  }, {
-	    key: 'modifySelectedField',
-	    value: function modifySelectedField(key, val) {
-	      _state2.default.select('selected', key).set(val);
-	    }
-	  }, {
-	    key: 'resetSelected',
-	    value: function resetSelected() {
-	      _state2.default.select('selected').set({});
-	    }
-	  }]);
-	
-	  return DataActions;
-	}();
-	
-	exports.default = new DataActions();
-
-/***/ },
+/* 30 */,
 /* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -21396,6 +21325,78 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _state = __webpack_require__(4);
+	
+	var _state2 = _interopRequireDefault(_state);
+	
+	var _config = __webpack_require__(23);
+	
+	var _config2 = _interopRequireDefault(_config);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var ItemActions = function () {
+	  function ItemActions() {
+	    _classCallCheck(this, ItemActions);
+	  }
+	
+	  _createClass(ItemActions, [{
+	    key: 'addOpportunity',
+	    value: function addOpportunity(data) {
+	      var db = new Firebase(_config2.default.firebaseURL + '/items/');
+	      db.push(data);
+	    }
+	  }, {
+	    key: 'selectOpportunity',
+	    value: function selectOpportunity(key) {
+	      this.resetSelected();
+	
+	      var db = new Firebase(_config2.default.firebaseURL + '/items/' + key);
+	      db.once('value', function (child) {
+	        _state2.default.select('selected').set(_extends({
+	          key: child.key()
+	        }, child.val()));
+	      });
+	    }
+	  }, {
+	    key: 'updateOpportunity',
+	    value: function updateOpportunity(key, data) {
+	      var db = new Firebase(_config2.default.firebaseURL + '/items/' + key);
+	      db.update(data);
+	    }
+	  }, {
+	    key: 'modifySelectedField',
+	    value: function modifySelectedField(key, val) {
+	      _state2.default.select('selected', key).set(val);
+	    }
+	  }, {
+	    key: 'resetSelected',
+	    value: function resetSelected() {
+	      _state2.default.select('selected').set({});
+	    }
+	  }]);
+	
+	  return ItemActions;
+	}();
+	
+	exports.default = new ItemActions();
 
 /***/ }
 /******/ ]);

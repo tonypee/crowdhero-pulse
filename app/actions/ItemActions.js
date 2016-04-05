@@ -1,18 +1,13 @@
 import tree from '../state';
 import config from '../config';
 
-class DataActions {
+class ItemActions {
 
   addOpportunity(data) {
     var db = new Firebase(config.firebaseURL + '/items/');
     db.push(data);
   }
-
-  updateOpportunity(key, data) {
-    var db = new Firebase(config.firebaseURL + '/items/' + key);
-    db.update(data);
-  }
-
+  
   selectOpportunity(key) {
     this.resetSelected();
 
@@ -25,6 +20,11 @@ class DataActions {
     });
   }
 
+  updateOpportunity(key, data) {
+    var db = new Firebase(config.firebaseURL + '/items/' + key);
+    db.update(data);
+  }
+
   modifySelectedField(key, val) {
     tree.select('selected', key).set(val);
   }
@@ -34,4 +34,4 @@ class DataActions {
   }
 }
 
-export default new DataActions();
+export default new ItemActions();
