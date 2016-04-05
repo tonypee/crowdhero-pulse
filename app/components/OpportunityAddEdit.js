@@ -44,7 +44,7 @@ class OpportunityAddEdit extends React.Component {
     DataActions.modifySelectedField(type, e.target.value)
   }
 
-  handleFile(e) {
+  handleFile(type, e) {
     var self = this;
     var reader = new FileReader();
     var file = e.target.files[0];
@@ -59,50 +59,51 @@ class OpportunityAddEdit extends React.Component {
     if (this.props.params.id && !this.props.selected.key) {
       return <div />;
     }
-    var imageStyle = {
-      maxWidth: 100,
-      maxHeight: 100
-    }
-
     return (
       <div className="page opportunityAddEdit">
-        {this.isAdding && <h3>Add</h3>}
-        {!this.isAdding && <h3>Update</h3>}
+        {this.isAdding ? <h3>Add</h3> : <h3>Update</h3>}
         <ul>
-          <li>
-            <label for="name">Name</label>
-            <input id="name" ref="name"
-                   onChange={this.onChange.bind(this, 'name')}
-                   value={this.props.selected.val.name || ''}/>
-          </li>
-          <li>
-            <label for="company">Company</label>
-            <input id="company" ref="company"
-                   onChange={this.onChange.bind(this, 'company')}
-                   value={this.props.selected.val.company || ''} />
-          </li>
-          <li>
-            <label for="name">Date</label>
-            <input id="date" ref="date"
-                   onChange={this.onChange.bind(this, 'date')}
-                   value={this.props.selected.val.date || ''}/>
-          </li>
-          <li>
-            <label for="name">Description</label>
-            <textarea ref="description"
-                      onChange={this.onChange.bind(this, 'description')}
-                      value={this.props.selected.val.description || ''}></textarea>
-          </li>
-          <li>
-            <label for="image">Image</label>
-            <img style={imageStyle} src={this.props.selected.val.image || ''} />
-            <input type="file" onChange={this.handleFile.bind(this)} />
-          </li>
+          {this.renderItem('input', 'name')}
+          {this.renderItem('input', 'company')}
+          {this.renderItem('input', 'date')}
+          {this.renderItem('textarea', 'description')}
+          {this.renderItem('image', 'image')}
         </ul>
         <br />
         <button onClick={this.onSubmit.bind(this)}>submit</button>
       </div>
     );
+  }
+
+  renderItem(type, name) {
+    return (
+      <li>
+        <label for="name">{name}</label>
+        {this.renderInput(type,name)}
+      </li>
+    );
+  }
+
+  renderInput(type, name) {
+    var imageStyle = {
+      maxWidth: 100,
+      maxHeight: 100
+    }
+    switch(type) {
+      case 'input':
+        return (<input id="name" ref="name"
+                  onChange={this.onChange.bind(this, name)}
+                  value={this.props.selected.val[name] || ''}/>)
+      case 'textarea':
+        return (<textarea ref="description"
+                  onChange={this.onChange.bind(this, name)}
+                  value={this.props.selected.val[name] || ''}></textarea>);
+      case 'image':
+        return (<div>
+          <img style={imageStyle} src={this.props.selected.val[name] || ''} />
+          <input type="file" onChange={this.handleFile.bind(this, name)} />
+        </div>);
+    }
   }
 }
 

@@ -4776,7 +4776,7 @@
 	    }
 	  }, {
 	    key: 'handleFile',
-	    value: function handleFile(e) {
+	    value: function handleFile(type, e) {
 	      var self = this;
 	      var reader = new FileReader();
 	      var file = e.target.files[0];
@@ -4792,20 +4792,14 @@
 	      if (this.props.params.id && !this.props.selected.key) {
 	        return _react2.default.createElement('div', null);
 	      }
-	      var imageStyle = {
-	        maxWidth: 100,
-	        maxHeight: 100
-	      };
-	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'page opportunityAddEdit' },
-	        this.isAdding && _react2.default.createElement(
+	        this.isAdding ? _react2.default.createElement(
 	          'h3',
 	          null,
 	          'Add'
-	        ),
-	        !this.isAdding && _react2.default.createElement(
+	        ) : _react2.default.createElement(
 	          'h3',
 	          null,
 	          'Update'
@@ -4813,65 +4807,11 @@
 	        _react2.default.createElement(
 	          'ul',
 	          null,
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'label',
-	              { 'for': 'name' },
-	              'Name'
-	            ),
-	            _react2.default.createElement('input', { id: 'name', ref: 'name',
-	              onChange: this.onChange.bind(this, 'name'),
-	              value: this.props.selected.val.name || '' })
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'label',
-	              { 'for': 'company' },
-	              'Company'
-	            ),
-	            _react2.default.createElement('input', { id: 'company', ref: 'company',
-	              onChange: this.onChange.bind(this, 'company'),
-	              value: this.props.selected.val.company || '' })
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'label',
-	              { 'for': 'name' },
-	              'Date'
-	            ),
-	            _react2.default.createElement('input', { id: 'date', ref: 'date',
-	              onChange: this.onChange.bind(this, 'date'),
-	              value: this.props.selected.val.date || '' })
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'label',
-	              { 'for': 'name' },
-	              'Description'
-	            ),
-	            _react2.default.createElement('textarea', { ref: 'description',
-	              onChange: this.onChange.bind(this, 'description'),
-	              value: this.props.selected.val.description || '' })
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              'label',
-	              { 'for': 'image' },
-	              'Image'
-	            ),
-	            _react2.default.createElement('img', { style: imageStyle, src: this.props.selected.val.image || '' }),
-	            _react2.default.createElement('input', { type: 'file', onChange: this.handleFile.bind(this) })
-	          )
+	          this.renderItem('input', 'name'),
+	          this.renderItem('input', 'company'),
+	          this.renderItem('input', 'date'),
+	          this.renderItem('textarea', 'description'),
+	          this.renderItem('image', 'image')
 	        ),
 	        _react2.default.createElement('br', null),
 	        _react2.default.createElement(
@@ -4880,6 +4820,45 @@
 	          'submit'
 	        )
 	      );
+	    }
+	  }, {
+	    key: 'renderItem',
+	    value: function renderItem(type, name) {
+	      return _react2.default.createElement(
+	        'li',
+	        null,
+	        _react2.default.createElement(
+	          'label',
+	          { 'for': 'name' },
+	          name
+	        ),
+	        this.renderInput(type, name)
+	      );
+	    }
+	  }, {
+	    key: 'renderInput',
+	    value: function renderInput(type, name) {
+	      var imageStyle = {
+	        maxWidth: 100,
+	        maxHeight: 100
+	      };
+	      switch (type) {
+	        case 'input':
+	          return _react2.default.createElement('input', { id: 'name', ref: 'name',
+	            onChange: this.onChange.bind(this, name),
+	            value: this.props.selected.val[name] || '' });
+	        case 'textarea':
+	          return _react2.default.createElement('textarea', { ref: 'description',
+	            onChange: this.onChange.bind(this, name),
+	            value: this.props.selected.val[name] || '' });
+	        case 'image':
+	          return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement('img', { style: imageStyle, src: this.props.selected.val[name] || '' }),
+	            _react2.default.createElement('input', { type: 'file', onChange: this.handleFile.bind(this, name) })
+	          );
+	      }
 	    }
 	  }]);
 	
