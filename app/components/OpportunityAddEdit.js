@@ -30,7 +30,7 @@ class OpportunityAddEdit extends React.Component {
   }
 
   onSubmit() {
-    var data = this.props.selected.val;
+    var data = this.props.selected;
     if (this.isAdding) {
       DataActions.addOpportunity(data);
     } else {
@@ -56,9 +56,10 @@ class OpportunityAddEdit extends React.Component {
   }
 
   render() {
-    if (this.props.params.id && !this.props.selected.key) {
-      return <div />;
-    }
+    var {selected} = this.props;
+
+    if (!this.isAdding && !selected) return <div />;
+
     return (
       <div className="page opportunityAddEdit">
         {this.isAdding ? <h3>Add</h3> : <h3>Update</h3>}
@@ -85,22 +86,19 @@ class OpportunityAddEdit extends React.Component {
   }
 
   renderInput(type, name) {
-    var imageStyle = {
-      maxWidth: 100,
-      maxHeight: 100
-    }
+    var {selected} = this.props;
     switch(type) {
       case 'input':
         return (<input id="name" ref="name"
                   onChange={this.onChange.bind(this, name)}
-                  value={this.props.selected.val[name] || ''}/>)
+                  value={selected[name] || ''}/>)
       case 'textarea':
         return (<textarea ref="description"
                   onChange={this.onChange.bind(this, name)}
-                  value={this.props.selected.val[name] || ''}></textarea>);
+                  value={selected[name] || ''}></textarea>);
       case 'image':
         return (<div>
-          <img style={imageStyle} src={this.props.selected.val[name] || ''} />
+          <img src={selected[name] || ''} />
           <input type="file" onChange={this.handleFile.bind(this, name)} />
         </div>);
     }

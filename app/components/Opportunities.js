@@ -17,25 +17,23 @@ class Opportunities extends React.Component {
   componentDidMount() {
     var db = new Firebase(config.firebaseURL + '/items/');
     db.on("child_added", child => {
-        tree.select('opportunities').set(child.key(), child.val());
+      tree.select('opportunities').push({
+        key: child.key(),
+        ...child.val()
       });
+    });
   }
 
   render() {
-    var imageStyle = {
-      maxWidth: 50,
-      maxHeight: 50
-    }
-
     return (
       <div className="page opportunities">
         <ul>
-          {_.map(this.props.opportunities, (val,i) => {
+          {this.props.opportunities.map(val => {
             return (
-              <li key={i}>
-                {val.image && <img style={imageStyle} src={val.image} />}
-                <Link to={`/view/${i}`}>{val.name} - {val.company}</Link> &nbsp;
-                <Link to={`/edit/${i}`}>edit</Link>
+              <li key={val.key}>
+                {val.image && <img src={val.image} />}
+                <Link to={`/view/${val.key}`}>{val.name} - {val.company}</Link> &nbsp;
+                <Link to={`/edit/${val.key}`}>edit</Link>
               </li>
             )
           })}

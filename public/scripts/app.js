@@ -187,11 +187,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var tree = new _baobab2.default({
-	  opportunities: {},
-	  selected: {
-	    key: null,
-	    val: {}
-	  }
+	  opportunities: [],
+	  selected: null
 	});
 	
 	window.tree = tree;
@@ -3918,14 +3915,11 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      if (!this.props.selected.key) {
-	        return _react2.default.createElement('div', null);
-	      }
-	      var imageStyle = {
-	        maxWidth: 100,
-	        maxHeight: 100
-	      };
-	      var val = this.props.selected.val;
+	      var selected = this.props.selected;
+	
+	
+	      if (!selected) return _react2.default.createElement('div', null);
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'page opportunity' },
@@ -3934,10 +3928,10 @@
 	          null,
 	          'Opportunity'
 	        ),
-	        val.image && _react2.default.createElement('img', { style: imageStyle, src: val.image }),
-	        val.name,
+	        selected.image && _react2.default.createElement('img', { src: selected.image }),
+	        selected.name,
 	        ' - ',
-	        val.company
+	        selected.company
 	      );
 	    }
 	  }]);
@@ -4760,7 +4754,7 @@
 	  }, {
 	    key: 'onSubmit',
 	    value: function onSubmit() {
-	      var data = this.props.selected.val;
+	      var data = this.props.selected;
 	      if (this.isAdding) {
 	        _DataActions2.default.addOpportunity(data);
 	      } else {
@@ -4789,9 +4783,11 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      if (this.props.params.id && !this.props.selected.key) {
-	        return _react2.default.createElement('div', null);
-	      }
+	      var selected = this.props.selected;
+	
+	
+	      if (!this.isAdding && !selected) return _react2.default.createElement('div', null);
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'page opportunityAddEdit' },
@@ -4838,24 +4834,22 @@
 	  }, {
 	    key: 'renderInput',
 	    value: function renderInput(type, name) {
-	      var imageStyle = {
-	        maxWidth: 100,
-	        maxHeight: 100
-	      };
+	      var selected = this.props.selected;
+	
 	      switch (type) {
 	        case 'input':
 	          return _react2.default.createElement('input', { id: 'name', ref: 'name',
 	            onChange: this.onChange.bind(this, name),
-	            value: this.props.selected.val[name] || '' });
+	            value: selected[name] || '' });
 	        case 'textarea':
 	          return _react2.default.createElement('textarea', { ref: 'description',
 	            onChange: this.onChange.bind(this, name),
-	            value: this.props.selected.val[name] || '' });
+	            value: selected[name] || '' });
 	        case 'image':
 	          return _react2.default.createElement(
 	            'div',
 	            null,
-	            _react2.default.createElement('img', { style: imageStyle, src: this.props.selected.val[name] || '' }),
+	            _react2.default.createElement('img', { src: selected[name] || '' }),
 	            _react2.default.createElement('input', { type: 'file', onChange: this.handleFile.bind(this, name) })
 	          );
 	      }
@@ -20780,6 +20774,8 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _dec, _class;
@@ -20835,31 +20831,28 @@
 	    value: function componentDidMount() {
 	      var db = new Firebase(_config2.default.firebaseURL + '/items/');
 	      db.on("child_added", function (child) {
-	        _state2.default.select('opportunities').set(child.key(), child.val());
+	        _state2.default.select('opportunities').push(_extends({
+	          key: child.key()
+	        }, child.val()));
 	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var imageStyle = {
-	        maxWidth: 50,
-	        maxHeight: 50
-	      };
-	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'page opportunities' },
 	        _react2.default.createElement(
 	          'ul',
 	          null,
-	          _.map(this.props.opportunities, function (val, i) {
+	          this.props.opportunities.map(function (val) {
 	            return _react2.default.createElement(
 	              'li',
-	              { key: i },
-	              val.image && _react2.default.createElement('img', { style: imageStyle, src: val.image }),
+	              { key: val.key },
+	              val.image && _react2.default.createElement('img', { src: val.image }),
 	              _react2.default.createElement(
 	                _reactRouter.Link,
-	                { to: '/view/' + i },
+	                { to: '/view/' + val.key },
 	                val.name,
 	                ' - ',
 	                val.company
@@ -20867,7 +20860,7 @@
 	              '  ',
 	              _react2.default.createElement(
 	                _reactRouter.Link,
-	                { to: '/edit/' + i },
+	                { to: '/edit/' + val.key },
 	                'edit'
 	              )
 	            );
@@ -20994,6 +20987,8 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _state = __webpack_require__(4);
@@ -21032,24 +21027,20 @@
 	
 	      var db = new Firebase(_config2.default.firebaseURL + '/items/' + key);
 	      db.once('value', function (child) {
-	        _state2.default.select('selected').set({
-	          key: child.key(),
-	          val: child.val()
-	        });
+	        _state2.default.select('selected').set(_extends({
+	          key: child.key()
+	        }, child.val()));
 	      });
 	    }
 	  }, {
 	    key: 'modifySelectedField',
 	    value: function modifySelectedField(key, val) {
-	      _state2.default.select('selected').set(['val', key], val);
+	      _state2.default.select('selected', key).set(val);
 	    }
 	  }, {
 	    key: 'resetSelected',
 	    value: function resetSelected() {
-	      _state2.default.select('selected').set({
-	        key: null,
-	        val: {}
-	      });
+	      _state2.default.select('selected').set({});
 	    }
 	  }]);
 	
@@ -21093,7 +21084,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  background: #e2e2e2;\n}\nul,\nli {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\nh3 {\n  font-size: 20px;\n}\n.navbar {\n  padding: 10px;\n}\n.page {\n  margin: 0 30px;\n  padding: 10px;\n}\n.opportunity {\n  background: white;\n}\n.opportunityAddEdit {\n  background: white;\n}\n.opportunities li {\n  margin: 3px;\n  padding: 10px;\n  background: white;\n}\n.opportunities li img {\n  padding-right: 5px;\n}\n.opportunities li label {\n  width: 150px;\n}\n", ""]);
+	exports.push([module.id, "body {\n  background: #e2e2e2;\n}\nul,\nli {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\nh3 {\n  font-size: 20px;\n}\n.navbar {\n  padding: 10px;\n}\n.page {\n  margin: 0 30px;\n  padding: 10px;\n}\n.opportunity {\n  background: white;\n}\n.opportunity img {\n  max-width: 100px;\n  max-height: 100px;\n}\n.opportunityAddEdit {\n  background: white;\n}\n.opportunityAddEdit img {\n  max-width: 100px;\n  max-height: 100px;\n}\n.opportunities li {\n  margin: 3px;\n  padding: 10px;\n  background: white;\n}\n.opportunities li img {\n  padding-right: 5px;\n}\n.opportunities li label {\n  width: 150px;\n}\n.opportunities img {\n  max-width: 50px;\n  max-height: 50px;\n}\n", ""]);
 	
 	// exports
 

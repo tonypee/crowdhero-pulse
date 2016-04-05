@@ -20,19 +20,15 @@ class Opportunity extends React.Component {
   }
 
   render() {
-    if (!this.props.selected.key) {
-      return <div />;
-    }
-    var imageStyle = {
-      maxWidth: 100,
-      maxHeight: 100
-    }
-    var val = this.props.selected.val;
+    var {selected} = this.props;
+
+    if (!selected) return <div />;
+
     return (
       <div className="page opportunity">
         <h3>Opportunity</h3>
-        {val.image && <img style={imageStyle} src={val.image} />}
-        {val.name} - {val.company}
+        {selected.image && <img src={selected.image} />}
+        {selected.name} - {selected.company}
       </div>
     );
   }

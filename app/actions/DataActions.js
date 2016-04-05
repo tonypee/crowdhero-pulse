@@ -20,20 +20,17 @@ class DataActions {
     db.once('value', child => {
       tree.select('selected').set({
         key:child.key(),
-        val:child.val()
+        ...child.val()
       });
     });
   }
 
   modifySelectedField(key, val) {
-    tree.select('selected').set(['val', key], val);
+    tree.select('selected', key).set(val);
   }
 
   resetSelected() {
-    tree.select('selected').set({
-      key:null,
-      val:{}
-    });
+    tree.select('selected').set({});
   }
 }
 
